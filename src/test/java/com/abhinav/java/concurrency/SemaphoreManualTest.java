@@ -75,7 +75,7 @@ public class SemaphoreManualTest {
                 .forEach(user -> service.execute(semaphore::tryAdd));
         ExecutorsUtil.smartShutDown(service);
 
-        Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+        TimeUnit.SECONDS.sleep(1);
 
         assertEquals(50, semaphore.availableSlots());
         assertTrue(semaphore.tryAdd());

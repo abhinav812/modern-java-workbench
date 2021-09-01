@@ -47,9 +47,9 @@ public class CountdownLatchExampleIntegrationTest {
     @Test
     public void whenDoingLotsOfThreadsInParallel_thenStartThemAtTheSameTime() throws Exception {
         List<String> outputScraper = Collections.synchronizedList(new ArrayList<>());
-        CountDownLatch latch = new CountDownLatch(5);
-        CountDownLatch callingThreadBlocker = new CountDownLatch(1);
-        CountDownLatch completedThreadCounter = new CountDownLatch(5);
+        var latch = new CountDownLatch(5);
+        var callingThreadBlocker = new CountDownLatch(1);
+        var completedThreadCounter = new CountDownLatch(5);
 
         List<Thread> workers = Stream
                 .generate(() -> new Thread(new WaitingWorker(outputScraper,

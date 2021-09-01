@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 public class WaitingWorker implements Runnable{
-    private Logger log = LoggerFactory.getLogger(WaitingWorker.class);
+    private final Logger log = LoggerFactory.getLogger(WaitingWorker.class);
 
     private final List<String> outputScrapper;
     private final CountDownLatch latch;
@@ -33,8 +33,8 @@ public class WaitingWorker implements Runnable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            completedThreadCounter.countDown(); // Always down latch when job DONE
             outputScrapper.add("Counted down");
+            completedThreadCounter.countDown(); // Always down latch when job DONE
         }
     }
 

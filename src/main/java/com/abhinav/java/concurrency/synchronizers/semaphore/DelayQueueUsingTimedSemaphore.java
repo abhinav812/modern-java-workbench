@@ -5,7 +5,7 @@ import org.apache.commons.lang3.concurrent.TimedSemaphore;
 import java.util.concurrent.TimeUnit;
 
 public class DelayQueueUsingTimedSemaphore {
-    private TimedSemaphore semaphore;
+    private final TimedSemaphore semaphore;
 
     public DelayQueueUsingTimedSemaphore(long period, TimeUnit unit, int slotLimit) {
         this.semaphore = new TimedSemaphore(period, unit, slotLimit);
