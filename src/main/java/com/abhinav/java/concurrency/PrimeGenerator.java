@@ -2,6 +2,7 @@ package com.abhinav.java.concurrency;
 
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("java:S106")
 public class PrimeGenerator {
     public static void main(String[] args) {
         Thread task = new PrimeGeneratorTask();
@@ -12,18 +13,21 @@ public class PrimeGenerator {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
+            // Restore interrupted state...
+            Thread.currentThread().interrupt();
         }
 
         // Interrupt the prime number generator
         task.interrupt();
 
         // Write information about the status of the Thread
-        System.out.printf("Main: Status of the Thread: %s\n", task.getState());
-        System.out.printf("Main: isInterrupted: %s\n", task.isInterrupted());
-        System.out.printf("Main: isAlive: %s\n", task.isAlive());
+        System.out.printf("Main: Status of the Thread: %s%n", task.getState());
+        System.out.printf("Main: isInterrupted: %s%n", task.isInterrupted());
+        System.out.printf("Main: isAlive: %s%n", task.isAlive());
     }
 }
 
+@SuppressWarnings("java:S106")
 class PrimeGeneratorTask extends Thread {
 
     @Override
@@ -33,11 +37,11 @@ class PrimeGeneratorTask extends Thread {
         // This bucle never ends... until is interrupted
         while (true) {
             if (isPrime(number)) {
-                System.out.printf("Number %d is Prime\n", number);
+                System.out.printf("Number %d is Prime%n", number);
             }
             // When is interrupted, write a message and ends
             if (isInterrupted()) {
-                System.out.printf("The Prime Generator has been Interrupted\n");
+                System.out.printf("The Prime Generator has been Interrupted%n");
                 return;
             }
             number++;
